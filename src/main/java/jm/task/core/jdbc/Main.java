@@ -34,7 +34,7 @@ public class Main {
         // get all users and print them
         List <User> users = userService.getAllUsers();
         for (User user : users) {
-            System.out.println(user.getName());
+            System.out.println(user);
         }
 //        remove user by id
         userService.removeUserById(2);

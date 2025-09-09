@@ -1,32 +1,28 @@
-//import app.config.AppConfig;
-//import app.model.AnimalsCage;
-//import org.junit.Assert;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.test.context.ContextConfiguration;
-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-//
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = AppConfig.class)
-//public class MainTest {
-//
-//    @Autowired
-//    private ApplicationContext applicationContext;
-//
-//    @Test
-//    public void mainTest() {
-//        long time = 0;
-//        for (int i = 0; i < 5; i++) {
-//            AnimalsCage bean =
-//                    applicationContext.getBean(AnimalsCage.class);
-//            if (i == 0) {
-//                time = bean.getTimer().getTime();
-//                continue;
-//            }
-//            Assert.assertEquals("Test failed, incorrect bean implementation.", time, bean.getTimer().getTime().longValue());
-//            System.out.println(time);
-//        }
-//    }
-//}
+import app.config.AppConfig;
+import app.model.AnimalsCage;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import static org.junit.Assert.*;
+
+public class MainTest{
+    @Test
+    public void testAnimalCageBeans(){
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AnimalsCage cage1 = context.getBean(AnimalsCage.class);
+        AnimalsCage cage2 = context.getBean(AnimalsCage.class);
+
+        assertSame(cage1, cage2);
+
+        Long time1 = cage1.getTimer().getTime();
+        Long time2 = cage2.getTimer().getTime();
+
+        assertEquals(time1,time2);
+
+        assertTrue(cage1.getAnimal().toString().contains("Dog"));
+
+
+
+    }
+}

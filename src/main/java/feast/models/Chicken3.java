@@ -15,7 +15,6 @@ public class Chicken3 {
 
     @Override
     public String toString() {
-        return "which is stuffed inside a pig, " + pig4.toString();
+        return "which is stuffed inside a chicken, " + pig4.toString();
     }
 }
-
